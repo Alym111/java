@@ -86,7 +86,7 @@ public class LibraryMS {
                     opened = false;
                     break;
                 default:
-                    System.out.println("Invalid option. Try again.");
+                    System.out.println("нормально выберите ");
             }
         }
     }
