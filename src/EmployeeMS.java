@@ -41,7 +41,7 @@ class FullTimeEmployee extends Employee{
         calculateResult();
     }
     public String displayEmployeeInfo(){
-        return "name: "+name+"id: "+id+"baseSalary: "+baseSalary+"benefits: "+benefits;
+        return "name: "+name+" id: "+id+" baseSalary: "+baseSalary+" benefits: "+benefits;
     }
 
 
