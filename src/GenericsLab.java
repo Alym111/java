@@ -59,3 +59,68 @@ import java.util.Map;
 //    }
 //}
 // /////////////////////////////////////////
+// 3 part
+import java.util.*;
+
+class Task implements Comparable<Task> {
+    String name;
+    int prio;
+    int time;
+
+    public Task(String name, int prio, int time) {
+        this.name = name;
+        this.prio = prio;
+        this.time = time;
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        if (t.prio != this.prio) {
+            return t.prio - this.prio;
+        } else {
+            return this.time - t.time;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "priority-" + prio + "; " + name + " time--(" + time + "m)";
+    }
+}
+
+class TaskScheduler {
+    private PriorityQueue<Task> tasks = new PriorityQueue<>();
+    private Queue<Task> pending = new LinkedList<>();
+    void add(Task t) {
+        tasks.add(t);
+        System.out.println("+ " + t);
+    }
+    void process() {
+        System.out.println(tasks.isEmpty() ? "no tasks." : "- " + tasks.poll());
+    }
+    void delay() {
+        if (!tasks.isEmpty()) pending.add(tasks.poll());
+    }
+    void retrieve() {
+        if (!pending.isEmpty()) tasks.add(pending.poll());
+    }
+    void show() {
+        System.out.println("Tasks--- " + tasks);
+        System.out.println("Pending--- " + pending);
+    }
+}
+public class GenericsLab {
+    public static void main(String[] args) {
+        TaskScheduler s = new TaskScheduler();
+        s.add(new Task("Review", 3, 20));
+        s.add(new Task("Update", 5, 45));
+        s.add(new Task("Backup", 2, 30));
+        s.add(new Task("Deploy", 5, 50));
+        s.add(new Task("Fix", 4, 25));
+
+        s.show();
+        s.process();
+        s.delay();
+        s.show();
+    }
+}
